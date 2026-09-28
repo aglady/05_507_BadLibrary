@@ -3,8 +3,9 @@ package ru.gr05507.ui;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Window extends JFrame {
+public class Window extends JFrame implements BookView{
 
     private JPanel panel;
     private JLabel label1;
@@ -17,7 +18,6 @@ public class Window extends JFrame {
     private JTextField field4;
     private JButton button;
     private JTextArea area;
-    private ArrayList<String> list;
 
     public Window(){
 
@@ -114,5 +114,35 @@ public class Window extends JFrame {
         });
         setLocationRelativeTo(null);
         pack();
+    }
+
+    @Override
+    public String getAuthor() {
+        return "";
+    }
+
+    @Override
+    public String getYear() {
+        return "";
+    }
+
+    @Override
+    public String getInfo() {
+        return "";
+    }
+
+    @Override
+    public void clearInput() {
+
+    }
+
+    @Override
+    public void showBooks(List<Book> books) {
+
+    }
+
+    @Override
+    public void showError(String Message) {
+
     }
 }
