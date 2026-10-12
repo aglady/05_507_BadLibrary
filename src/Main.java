@@ -8,5 +8,6 @@ public class Main {
         Window window = new Window(controller);
         controller.attachView(window);
         window.setVisible(true);
+        controller.viewOpened();
     }
 }

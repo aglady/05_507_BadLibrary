@@ -2,6 +2,8 @@ package ru.gr05507.ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class Window extends JFrame implements BookView{
     private JLabel label2;
     private JLabel label3;
     private JLabel label4;
+    private JLabel labelStatus;
     private JTextField field1;
     private JTextField field2;
     private JTextField field3;
@@ -34,6 +37,9 @@ public class Window extends JFrame implements BookView{
         label2.setText("Название");
         label3.setText("Год издания");
         label4.setText("Дополнительно");
+
+        labelStatus = new JLabel();
+
 
         field1 = new JTextField();
         field2 = new JTextField();
@@ -88,8 +94,27 @@ public class Window extends JFrame implements BookView{
 
         add(panel, BorderLayout.NORTH);
         add(new JScrollPane(area), BorderLayout.CENTER);
+        add(labelStatus, BorderLayout.SOUTH);
         button.addActionListener(e -> {
             controller.addBookClicked();
+        });
+        field1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                controller.inputChanged();
+            }
+        });
+        field2.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                controller.inputChanged();
+            }
+        });
+        field3.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                controller.inputChanged();
+            }
         });
         setLocationRelativeTo(null);
         pack();
@@ -145,5 +170,14 @@ public class Window extends JFrame implements BookView{
     @Override
     public void showError(String message) {
         JOptionPane.showMessageDialog(this, message);
+    }
+
+    @Override
+    public void render(BookFormState state) {
+        button.setEnabled(state.addEnabled());
+        labelStatus.setText(state.status());
+        if (state.erorr() != null){
+            showError(state.erorr());
+        }
     }
 }

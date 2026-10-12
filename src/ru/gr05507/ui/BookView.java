@@ -10,4 +10,5 @@ public interface BookView {
     void clearInput();
     void showBooks(List<Book> books);
     void showError(String message);
+    void render(BookFormState state);
 }
