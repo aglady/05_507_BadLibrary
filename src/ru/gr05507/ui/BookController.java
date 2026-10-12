@@ -11,7 +11,7 @@ public class BookController {
     public void addBookClicked(){
         try{
             var author = view.getAuthor();
-            var title = view.getTitle();
+            var title = view.getBookTitle();
             var year = view.getYear();
             var info = view.getInfo();
             service.addBook(author, title, year, info);

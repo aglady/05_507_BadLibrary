@@ -18,9 +18,10 @@ public class Window extends JFrame implements BookView{
     private JTextField field4;
     private JButton button;
     private JTextArea area;
+    private final BookController controller;
 
-    public Window(){
-
+    public Window(BookController controller){
+        this.controller = controller;
         panel = new JPanel();
 
         area = new JTextArea();
@@ -42,7 +43,6 @@ public class Window extends JFrame implements BookView{
         button = new JButton();
         button.setText("Добавить");
 
-        list = new ArrayList<>();
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(1000,500));
@@ -89,28 +89,7 @@ public class Window extends JFrame implements BookView{
         add(panel, BorderLayout.NORTH);
         add(new JScrollPane(area), BorderLayout.CENTER);
         button.addActionListener(e -> {
-            String text1 = field1.getText();
-            String text2 = field2.getText();
-            String text3 = field3.getText();
-            String text4 = field4.getText();
-            if(text1 == null || text1.isBlank()){
-                JOptionPane.showMessageDialog(this, "Введите автора");
-                return;
-            }
-            if(text2 == null || text2.isBlank()){
-                JOptionPane.showMessageDialog(this, "Введите название");
-                return;
-            }
-            if(text3 == null || text3.isBlank()){
-                JOptionPane.showMessageDialog(this, "Введите год издания");
-                return;
-            }
-
-            list.add( (list.size() + 1) + ". " + text1 + " " + text2 + " " + text3 + " " + text4);
-            area.setText("");
-            for(String elem: list){
-                area.append(elem + "\n");
-            }
+            controller.addBookClicked();
         });
         setLocationRelativeTo(null);
         pack();
@@ -118,31 +97,53 @@ public class Window extends JFrame implements BookView{
 
     @Override
     public String getAuthor() {
-        return "";
+        return field1.getText();
+    }
+
+    @Override
+    public String getBookTitle() {
+        return field2.getText();
     }
 
     @Override
     public String getYear() {
-        return "";
+        return field3.getText();
     }
 
     @Override
     public String getInfo() {
-        return "";
+        return field4.getText();
     }
 
     @Override
     public void clearInput() {
-
+        field1.setText("");
+        field2.setText("");
+        field3.setText("");
+        field4.setText("");
     }
 
     @Override
     public void showBooks(List<Book> books) {
-
+        area.setText("");
+        var i = 1;
+        for(var book: books){
+            area.append(i++ + ": ");
+            area.append(book.author());
+            area.append(" | ");
+            area.append(book.title());
+            area.append(" | ");
+            area.append("" + book.year());
+            if (book.info() != null && !book.info().isBlank()) {
+                area.append(" | ");
+                area.append(book.info());
+            }
+            area.append(System.lineSeparator());
+        }
     }
 
     @Override
-    public void showError(String Message) {
-
+    public void showError(String message) {
+        JOptionPane.showMessageDialog(this, message);
     }
 }

@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface BookView {
     String getAuthor();
-    String getTitle();
+    String getBookTitle();
     String getYear();
     String getInfo();
     void clearInput();
     void showBooks(List<Book> books);
-    void showError(String Message);
+    void showError(String message);
 }
