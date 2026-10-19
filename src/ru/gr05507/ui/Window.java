@@ -52,7 +52,7 @@ public class Window extends JFrame implements BookView{
 
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(1000,500));
+        setMinimumSize(new Dimension(600,300));
 
         GroupLayout gl = new GroupLayout(panel);
         panel.setVisible(true);
