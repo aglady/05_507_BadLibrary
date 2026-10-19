@@ -1,10 +1,11 @@
 package ru.gr05507.ui;
 
+import ru.gr05507.domain.Book;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Window extends JFrame implements BookView{

@@ -1,10 +1,16 @@
 package ru.gr05507.ui;
 
+import ru.gr05507.application.BookService;
+
 public class BookController {
     private final BookService service;
     private BookView view;
+    private final BookInputParser parser;
 
-    public BookController(BookService service){ this.service = service; }
+    public BookController(BookService service, BookInputParser parser){
+        this.service = service;
+        this.parser = parser;
+    }
 
     public void attachView(BookView view){ this.view = view; }
 
@@ -14,7 +20,7 @@ public class BookController {
             var title = view.getBookTitle();
             var year = view.getYear();
             var info = view.getInfo();
-            service.addBook(author, title, year, info);
+            service.addBook(parser.parse(author, title, year, info));
             view.clearInput();
             view.showBooks(service.getAllBooks());
             view.render(BookFormState.init());

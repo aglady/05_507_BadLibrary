@@ -1,5 +1,7 @@
 package ru.gr05507.ui;
 
+import ru.gr05507.domain.Book;
+
 import java.util.List;
 
 public interface BookView {
